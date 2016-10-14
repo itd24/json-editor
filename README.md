@@ -1,6 +1,8 @@
 JSON Editor
 ===========
 
+This is a fork of the JSON Editor, which support a few new features needed by me...
+
 ![JSON Schema -> HTML Editor -> JSON](https://raw.github.com/jdorn/json-editor/master/jsoneditor.png)
 
 JSON Editor takes a JSON Schema and uses it to generate an HTML form.  
