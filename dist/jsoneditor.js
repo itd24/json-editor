@@ -2479,7 +2479,8 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       // Layout the form
       container = document.createElement('div');
       for(i=0; i<rows.length; i++) {
-        var row = this.theme.getGridRow();
+        //we add the editor so the theme has access to the input element (especially the schema)
+        var row = this.theme.getGridRow(editor);
         container.appendChild(row);
         for(j=0; j<rows[i].editors.length; j++) {
           var key = rows[i].editors[j].key;
@@ -2497,7 +2498,8 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       $each(this.property_order, function(i,key) {
         var editor = self.editors[key];
         if(editor.property_removed) return;
-        var row = self.theme.getGridRow();
+        //we add the editor so the theme has access to the input element (especially the schema)
+        var row = self.theme.getGridRow(editor);
         container.appendChild(row);
 
         if(editor.options.hidden) editor.container.style.display = 'none';
@@ -6809,6 +6811,16 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     bar.style.width = '100%';
     bar.innerHTML = '';
   }
+});
+
+JSONEditor.defaults.themes.bootstrap3Flexible = JSONEditor.defaults.themes.bootstrap3.extend({
+    getGridRow: function(editor) {
+      var el = document.createElement('div');
+      el.className = 'row';
+      if(!!editor.schema.wrapperClass)
+        el.className += " "+editor.schema.wrapperClass;
+      return el;
+    },
 });
 
 // Base Foundation theme
